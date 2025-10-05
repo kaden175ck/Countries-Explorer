@@ -1,5 +1,5 @@
 name: Deploy to GitHub Pages
-# trigger
+
 on:
   push:
     branches: [main]
@@ -31,9 +31,14 @@ jobs:
       - name: Install dependencies
         run: npm ci || npm install
 
-      - name: Build
+      - name: Build (React Router v7)
         run: npm run build
 
+      # 必须：配置 Pages（官方动作）
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # 探测输出目录（RR v7 默认为 build/client；Vite 为 dist）
       - name: Detect output dir
         id: out
         run: |
@@ -43,6 +48,15 @@ jobs:
             echo "dir=dist" >> $GITHUB_OUTPUT
           fi
 
+      # 打印产物，确认是否有 assets/*.js/*.css
+      - name: List output dir
+        run: |
+          echo "OUTPUT = ${{ steps.out.outputs.dir }}"
+          ls -la "${{ steps.out.outputs.dir }}"
+          echo "---- files (depth 2) ----"
+          find "${{ steps.out.outputs.dir }}" -maxdepth 2 -type f -print
+
+      # SPA 刷新回退
       - name: Create 404.html for SPA fallback
         run: |
           cp "${{ steps.out.outputs.dir }}/index.html" "${{ steps.out.outputs.dir }}/404.html" || true
