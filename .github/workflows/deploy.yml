@@ -32,9 +32,7 @@ jobs:
         run: npm ci || npm install
 
       - name: Build
-        run: |
-          # React Router v7 的构建
-          npm run build
+        run: npm run build
 
       - name: Detect output dir
         id: out
@@ -44,8 +42,10 @@ jobs:
           else
             echo "dir=dist" >> $GITHUB_OUTPUT
           fi
-          # SPA fallback
-          cp ${{ steps.out.outputs.dir }}/index.html ${{ steps.out.outputs.dir }}/404.html || true
+
+      - name: Create 404.html for SPA fallback
+        run: |
+          cp "${{ steps.out.outputs.dir }}/index.html" "${{ steps.out.outputs.dir }}/404.html" || true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
