@@ -2,6 +2,12 @@
 
 A cool, interactive web application that lets you explore country data using the new **React Router V7** framework. This project fetches data from the [REST Countries API](https://restcountries.com) and allows you to filter and view detailed information about countries, including their names, capitals, regions, populations, and flags.
 
+## Demo
+
+_Link to Demo:_  
+[![Live Demo](https://img.shields.io/badge/Website-Online-green?style=flat&logo=vercel)](https://kaden175ck.github.io/Countries-Explorer/)
+![website screenshot](./screenshot.png)
+
 ## Features
 
 - **Dynamic Routing:** Leverages React Router V7 to handle multiple routes and dynamic URL parameters.
@@ -9,11 +15,6 @@ A cool, interactive web application that lets you explore country data using the
 - **Search & Filter:** Users can search for countries by name and filter by region.
 - **Responsive UI:** Styled with Tailwind CSS to create a modern, responsive interface.
 - **Modular Code:** Organized into reusable components for easy scaling and maintenance.
-
-## Demo
-
-_Link to Demo:_  
-[Live Demo](https://kaden175ck.github.io/Countries-Explorer/)
 
 ## Usage
 
